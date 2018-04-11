@@ -15,8 +15,12 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
-//    "baseUrl": "./",
+    "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }
