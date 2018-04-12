@@ -13,11 +13,8 @@
     "importHelpers": true,
     "strict": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
     "baseUrl": "./",
-    "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": true
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "node_modules",
