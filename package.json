@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-native-scripts-ts": "1.11.4",
+    "@types/react-navigation": "^1.5.5",
     "@types/jest": "^22.0.0",
     "@types/react": "^16.0.38",
-    "@types/react-native": "^0.52.0",
+    "@types/react-native": "0.55.1",
     "@types/react-test-renderer": "^16.0.0",
-    "ts-jest": "^22.0.4",
     "jest-expo": "25.0.0",
+    "react-native-scripts-ts": "1.11.4",
     "react-native-typescript-transformer": "^1.2.3",
     "react-test-renderer": "16.2.0",
+    "ts-jest": "^22.0.4",
     "tslib": "^1.7.1",
     "typescript": "^2.7.0"
   },
@@ -47,8 +48,9 @@
     }
   },
   "dependencies": {
-    "expo": "^25.0.0",
-    "react": "16.2.0",
-    "react-native": "0.52.0"
+    "expo": "26.0.0",
+    "react": "16.3.1",
+    "react-native": "0.54.4",
+    "react-navigation": "^1.5.11"
   }
 }
