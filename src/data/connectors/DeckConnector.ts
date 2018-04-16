@@ -9,22 +9,28 @@ class DeckConnector {
     private static readonly DeckAsyncStorageKey = "UdaciCards.Decks";
 
     createNewDeck(title: string) {
-        const storageItem: DeckTitleToDeckDataMap = {
-            [title]: new DeckData()
-        };
+        const newDeck = new DeckData();
+        newDeck.title = title;
 
-        return this.mergeDeckTitleToDeckDataMap(storageItem);
+        return this.mergeDeckData(newDeck);
     }
 
     createNewQuestion(deckTitle: string, question: QuestionData) {
-        const delta: Partial<DeckData> = {
-            questions: [
-                question
-            ]
-        };
+        return this.getDeck(deckTitle)
+            .then((deck) => {
+                if (deck != null) {
+                    deck.questions.push(question);
 
+                    return this.mergeDeckData(deck);
+                }
+
+                return;
+            });
+    }
+
+    private mergeDeckData(deck: DeckData) {
         const storageItem = {
-            [deckTitle]: delta
+            [deck.title]: deck
         };
 
         return this.mergeDeckTitleToDeckDataMap(storageItem);
@@ -34,11 +40,33 @@ class DeckConnector {
         return AsyncStorage.mergeItem(DeckConnector.DeckAsyncStorageKey, JSON.stringify(deckTitleToDeckDataMap));
     }
 
-    getAllDecks(title: string): Promise<DeckTitleToDeckDataMap> {
+    getAllDecks(): Promise<DeckTitleToDeckDataMap> {
         return AsyncStorage.getItem(DeckConnector.DeckAsyncStorageKey)
             .then((item) => {
+                if (item == null) {
+                    return {};
+                }
+
                 return JSON.parse(item);
             });
+    }
+
+    getDeck(title: string): Promise<DeckData> {
+        return this.getAllDecks()
+            .then((result) => {
+
+                const resultDeck = result[title];
+
+                if (resultDeck == null) {
+                    throw new Error(`No deck found with this title: ${title}`);
+                }
+
+                return resultDeck;
+            });
+    }
+
+    deleteAllDecks() {
+        return AsyncStorage.setItem(DeckConnector.DeckAsyncStorageKey, JSON.stringify({}));
     }
 }
 

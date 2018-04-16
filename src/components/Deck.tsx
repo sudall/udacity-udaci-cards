@@ -3,8 +3,12 @@ import {Button, Text, View} from "react-native";
 import DeckData from "src/data/models/DeckData";
 
 // props that are provided as parameters
-interface IOwnProps {
-    deck: DeckData;
+module Deck {
+    export interface IOwnProps {
+        deck: DeckData;
+        onAddQuestion: () => void;
+        onStartQuiz: () => void;
+    }
 }
 
 // props that are provided via injection
@@ -12,7 +16,7 @@ interface IInjectedProps {
     // someAction: () => void;
 }
 
-type IAllProps = IOwnProps & IInjectedProps;
+type IAllProps = Deck.IOwnProps & IInjectedProps;
 
 // internal state of the component
 interface IState {
@@ -26,24 +30,16 @@ class Deck extends React.Component<IAllProps, IState> {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
     };
 
-    onAddCard = () => {
-        //TODO
-    };
-
-    onStartQuiz = () => {
-        //TODO
-    };
-
     render() {
-        const {onAddCard, onStartQuiz} = this;
-        const {deck} = this.props;
+        const {} = this;
+        const {deck, onAddQuestion, onStartQuiz} = this.props;
         const {} = this.state;
 
         return (
             <View style={{alignItems: "center", paddingVertical: 50}}>
                 <Text>{deck.title}</Text>
                 <Text>{deck.questions.length} cards</Text>
-                <Button onPress={onAddCard} title={"Add Card"}/>
+                <Button onPress={onAddQuestion} title={"Add Card"}/>
                 <Button onPress={onStartQuiz} title={"Start Quiz"}/>
             </View>
         );

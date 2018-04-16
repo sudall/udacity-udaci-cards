@@ -7,6 +7,7 @@ import DeckData from "src/data/models/DeckData";
 // props that are provided as parameters
 interface IOwnProps {
     deck: DeckData;
+    onNewQestionAdded: () => void;
 }
 
 // props that are provided via injection
@@ -59,6 +60,8 @@ class AddNewQuestionForm extends React.Component<IAllProps, IState> {
                         question: "",
                         answer: ""
                     });
+
+                    this.props.onNewQestionAdded();
                 });
         }
     };
@@ -71,10 +74,10 @@ class AddNewQuestionForm extends React.Component<IAllProps, IState> {
         return (
             <View style={{alignItems: "center", paddingVertical: 50}}>
                 <Text>Enter a question and its answer below.</Text>
-                <TextInput placeholder={"Questions"} value={question} onChange={(event) => {
+                <TextInput style={{width: "75%"}} placeholder={"Question"} value={question} onChange={(event) => {
                     return onQuestionInputChange(event.nativeEvent.text);
                 }}/>
-                <TextInput placeholder={"Answer"} value={answer} onChange={(event) => {
+                <TextInput style={{width: "75%"}} placeholder={"Answer"} value={answer} onChange={(event) => {
                     return onAnswerInputChange(event.nativeEvent.text);
                 }}/>
                 <Button onPress={onSubmit} title={"Submit"}/>

@@ -1,11 +1,12 @@
 import * as React from "react";
-import {FlatList, SectionList, Text, View} from "react-native";
+import {FlatList, GestureResponderEvent, SectionList, Text, TouchableNativeFeedback, View} from "react-native";
 import {DeckTitleToDeckDataMap} from "src/components/UdaciCardsApplication";
 import DeckData from "src/data/models/DeckData";
 
 // props that are provided as parameters
-interface IOwnProps {
+export interface IOwnProps {
     decks: DeckTitleToDeckDataMap;
+    onDeckPress: (deck: DeckData) => void;
 }
 
 // props that are provided via injection
@@ -27,13 +28,21 @@ class DeckList extends React.Component<IAllProps, IState> {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
     };
 
+    private getOnDeckPress(deck: DeckData) {
+        return () => {
+            this.props.onDeckPress(deck);
+        }
+    };
+
     renderDeckItem = ({item}: {item: DeckData}) => {
         const deck = item;
         return (
-            <View style={{borderWidth: 1, alignItems: "center", paddingVertical: 50}}>
-                <Text>{deck.title}</Text>
-                <Text>{deck.questions.length} cards</Text>
-            </View>
+            <TouchableNativeFeedback onPress={this.getOnDeckPress(deck)}>
+                <View style={{borderWidth: 1, alignItems: "center", paddingVertical: 50}}>
+                    <Text>{deck.title}</Text>
+                    <Text>{deck.questions.length} cards</Text>
+                </View>
+            </TouchableNativeFeedback>
         );
     };
 

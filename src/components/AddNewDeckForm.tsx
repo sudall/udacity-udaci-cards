@@ -54,7 +54,7 @@ class AddNewDeckForm extends React.Component<IAllProps, IState> {
         return (
             <View style={{alignItems: "center", paddingVertical: 50}}>
                 <Text>What is the title of your new deck?</Text>
-                <TextInput value={title} onChange={(event) => {
+                <TextInput style={{width: "75%"}} value={title} onChange={(event) => {
                     return onTitleInputChange(event.nativeEvent.text);
                 }}/>
                 <Button onPress={onSubmit} title={"Submit"}/>
