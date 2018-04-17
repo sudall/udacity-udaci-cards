@@ -1,7 +1,8 @@
 import * as React from "react";
 import DeckData from "src/data/models/DeckData";
-import {NavigationInjectedProps, NavigationScreenProps} from "react-navigation";
+import {NavigationInjectedProps, NavigationScreenProps, withNavigation} from "react-navigation";
 import Quiz from "src/components/Quiz";
+import NavigationUtils from "src/utilities/NavigationUtils";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -45,12 +46,15 @@ class QuizScreen extends React.Component<IAllProps, IState> {
         const {} = this.props;
         const {} = this.state;
 
-        const deck = this.props.navigation.getParam("deck", new DeckData());
+        const deck = NavigationUtils.getParam(this.props, "deck");
 
         return (
-            <Quiz deck={deck}/>
+            deck != null ?
+                <Quiz deck={deck}/>
+                :
+                null
         );
     }
 }
 
-export default QuizScreen;
+export default withNavigation(QuizScreen);

@@ -1,7 +1,8 @@
 import * as React from "react";
 import AddNewQuestionForm from "src/components/AddNewQuestionForm";
-import {NavigationInjectedProps, NavigationScreenProps} from "react-navigation";
+import {NavigationInjectedProps, NavigationScreenProps, withNavigation} from "react-navigation";
 import DeckData from "src/data/models/DeckData";
+import NavigationUtils from "src/utilities/NavigationUtils";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -49,12 +50,15 @@ class AddNewQuestionScreen extends React.Component<IAllProps, IState> {
         const {navigation} = this.props;
         const {} = this.state;
 
-        const deck = navigation.getParam("deck", new DeckData());
+        const deck = NavigationUtils.getParam(this.props, "deck");
 
         return (
-            <AddNewQuestionForm deck={deck} onNewQestionAdded={onNewQuestionAdded}/>
+            deck != null ?
+                <AddNewQuestionForm deck={deck} onNewQuestionAdded={onNewQuestionAdded}/>
+                :
+                null
         );
     }
 }
 
-export default AddNewQuestionScreen;
+export default withNavigation(AddNewQuestionScreen);

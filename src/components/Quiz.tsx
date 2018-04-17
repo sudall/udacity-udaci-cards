@@ -68,6 +68,10 @@ class Quiz extends React.Component<IAllProps, IState> {
         const {deck} = this.props;
         const {currentQuestionIndex, isViewingAnswer, correctQuestionCount} = this.state;
 
+        if (deck.questions.length === 0) {
+            return <Text>You need at least one card in this deck to take a quiz.</Text>
+        }
+
         const currentQuestionNumber = currentQuestionIndex + 1;
         // if the current question is beyond the number of questions...
         if (currentQuestionNumber > deck.questions.length) {

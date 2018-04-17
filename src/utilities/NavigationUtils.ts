@@ -1,4 +1,4 @@
-import {NavigationInjectedProps, NavigationScreenProps} from "react-navigation";
+import {NavigationScreenProps} from "react-navigation";
 
 class NavigationUtils {
     static getParam<TNavigationParams, TParamName extends keyof TNavigationParams>(props: NavigationScreenProps<TNavigationParams>, paramName: TParamName): TNavigationParams[TParamName] | null {

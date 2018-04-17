@@ -13,6 +13,8 @@ import FullDeckList, {default as FullDeckListScreen, FullDeckListScreenUtils} fr
 import DeckPage, {default as DeckScreen, DeckScreenUtils} from "src/components/DeckScreen";
 import AddNewQuestionScreen, {AddNewQuestionScreenUtils} from "src/components/AddNewQuestionScreen";
 import {default as QuizScreen, QuizScreenUtils} from "src/components/QuizScreen";
+import AddNewDeckScreen, {AddNewDeckScreenUtils} from "src/components/AddNewDeckScreen";
+import HomeScreen, {HomeScreenUtils} from "src/components/HomeScreen";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -58,10 +60,22 @@ const NavigationStack = StackNavigator(
             navigationOptions: {
                 title: "Quiz"
             }
+        },
+        [AddNewDeckScreenUtils.RouteName]: {
+            screen: AddNewDeckScreen,
+            navigationOptions: {
+                title: "Add a deck"
+            }
+        },
+        [HomeScreenUtils.RouteName]: {
+            screen: HomeScreen,
+            navigationOptions: {
+                title: "Home"
+            }
         }
     },
     {
-        initialRouteName: FullDeckListScreenUtils.RouteName
+        initialRouteName: HomeScreenUtils.RouteName
     });
 
 // export const fakeDecks: DeckTitleToDeckDataMap = {
@@ -235,11 +249,11 @@ class UdaciCardsApplication extends React.Component<IAllProps, IState> {
 
         return (
             <View style={styles.container}>
-                <View style={{height: 45}}>
+                {/*<View style={{height: 45}}>*/}
                     {/*<Text>Open up App.ts to start working on your app!</Text>*/}
                     {/*<Text>Changes you make will automatically reload.</Text>*/}
                     {/*<Text>Shake your phone to open the developer menu.</Text>*/}
-                </View>
+                {/*</View>*/}
                 {/*<DeckList decks={allDecks}/>*/}
                 {/*<Deck deck={exampleDeck}/>*/}
                 {/*<Quiz deck={exampleDeck}/>*/}
@@ -252,7 +266,7 @@ class UdaciCardsApplication extends React.Component<IAllProps, IState> {
                 {/*<AddNewDeckForm/>*/}
                 {/*<AddNewQuestionForm deck={allDecks["exampleDeck"]}/>*/}
                 <NavigationStack />
-                <Text>{JSON.stringify(allDecks)}</Text>
+                {/*<Text>{JSON.stringify(allDecks)}</Text>*/}
             </View>
         );
     }
@@ -261,7 +275,7 @@ class UdaciCardsApplication extends React.Component<IAllProps, IState> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#3f3e3d',
+        // backgroundColor: '#3f3e3d',
         alignItems: "stretch",
         justifyContent: 'center',
     },

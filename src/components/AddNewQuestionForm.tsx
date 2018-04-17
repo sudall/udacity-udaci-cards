@@ -7,7 +7,7 @@ import DeckData from "src/data/models/DeckData";
 // props that are provided as parameters
 interface IOwnProps {
     deck: DeckData;
-    onNewQestionAdded: () => void;
+    onNewQuestionAdded: () => void;
 }
 
 // props that are provided via injection
@@ -61,7 +61,7 @@ class AddNewQuestionForm extends React.Component<IAllProps, IState> {
                         answer: ""
                     });
 
-                    this.props.onNewQestionAdded();
+                    this.props.onNewQuestionAdded();
                 });
         }
     };

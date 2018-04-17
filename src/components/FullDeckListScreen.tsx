@@ -11,6 +11,8 @@ import {
 } from "react-navigation";
 import DeckData from "src/data/models/DeckData";
 import {DeckScreenUtils} from "src/components/DeckScreen";
+import {Text, TouchableNativeFeedback, View} from "react-native";
+import {AddNewDeckScreenUtils} from "src/components/AddNewDeckScreen";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -68,7 +70,9 @@ class FullDeckListScreen extends React.Component<IAllProps, IState> {
         const {allDecks} = this.state;
 
         return (
-            <DeckList decks={allDecks} onDeckPress={onDeckPress} />
+            <View>
+                <DeckList decks={allDecks} onDeckPress={onDeckPress} />
+            </View>
         );
     }
 }
