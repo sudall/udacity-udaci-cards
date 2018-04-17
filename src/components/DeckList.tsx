@@ -1,11 +1,10 @@
 import * as React from "react";
-import {FlatList, GestureResponderEvent, SectionList, Text, TouchableNativeFeedback, View} from "react-native";
-import {DeckTitleToDeckDataMap} from "src/components/UdaciCardsApplication";
+import {FlatList, Text, TouchableNativeFeedback, View} from "react-native";
 import DeckData from "src/data/models/DeckData";
 
 // props that are provided as parameters
 export interface IOwnProps {
-    decks: DeckTitleToDeckDataMap;
+    decks: DeckData[];
     onDeckPress: (deck: DeckData) => void;
 }
 
@@ -51,12 +50,10 @@ class DeckList extends React.Component<IAllProps, IState> {
         const {decks} = this.props;
         const {} = this.state;
 
-        const deckArray = Object.values(decks);
-
         return (
             <View>
                 <FlatList keyExtractor={(item: DeckData) => { return item.title }}
-                          data={deckArray}
+                          data={decks}
                           renderItem={this.renderDeckItem} />
             </View>
         );

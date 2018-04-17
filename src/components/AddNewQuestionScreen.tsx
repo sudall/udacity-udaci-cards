@@ -47,7 +47,6 @@ class AddNewQuestionScreen extends React.Component<IAllProps, IState> {
 
     render() {
         const {onNewQuestionAdded} = this;
-        const {navigation} = this.props;
         const {} = this.state;
 
         const deck = NavigationUtils.getParam(this.props, "deck");

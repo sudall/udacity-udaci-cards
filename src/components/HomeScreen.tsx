@@ -1,8 +1,9 @@
 import * as React from "react";
-import {Text, TouchableNativeFeedback, View} from "react-native";
+import {ScrollView, Text, TouchableNativeFeedback, View} from "react-native";
 import {AddNewDeckScreenUtils} from "src/components/AddNewDeckScreen";
 import {FullDeckListScreenUtils} from "src/components/FullDeckListScreen";
 import {NavigationInjectedProps, withNavigation} from "react-navigation";
+import DeckConnector from "src/data/connectors/DeckConnector";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -40,13 +41,17 @@ class HomeScreen extends React.Component<IAllProps, IState> {
         this.props.navigation.navigate(FullDeckListScreenUtils.RouteName);
     };
 
+    private onDeleteAllDecksPress = () => {
+        DeckConnector.instance.deleteAllDecks();
+    };
+
     render() {
-        const {onAddNewDeckPress, onViewAllDecksPress} = this;
+        const {onAddNewDeckPress, onViewAllDecksPress, onDeleteAllDecksPress} = this;
         const {} = this.props;
         const {} = this.state;
 
         return (
-            <View>
+            <ScrollView>
                 <TouchableNativeFeedback onPress={onViewAllDecksPress}>
                     <View style={{borderWidth: 1, alignItems: "center", paddingVertical: 50}}>
                         <Text>View all decks</Text>
@@ -57,7 +62,12 @@ class HomeScreen extends React.Component<IAllProps, IState> {
                         <Text>Add a new deck</Text>
                     </View>
                 </TouchableNativeFeedback>
-            </View>
+                <TouchableNativeFeedback onPress={onDeleteAllDecksPress}>
+                    <View style={{borderWidth: 1, alignItems: "center", paddingVertical: 50, backgroundColor: "red"}}>
+                        <Text>Delete all decks</Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </ScrollView>
         );
     }
 }

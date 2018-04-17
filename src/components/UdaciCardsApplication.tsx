@@ -30,7 +30,6 @@ type IAllProps = IOwnProps & IInjectedProps;
 
 // internal state of the component
 interface IState {
-    allDecks: DeckTitleToDeckDataMap;
 }
 
 export type DeckTitleToDeckDataMap = {[deckTitle: string]: DeckData};
@@ -78,195 +77,22 @@ const NavigationStack = StackNavigator(
         initialRouteName: HomeScreenUtils.RouteName
     });
 
-// export const fakeDecks: DeckTitleToDeckDataMap = {
-//     "Deck1": {
-//         title: "Deck1",
-//         questions: [
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             },
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             },
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             },
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             }
-//         ]
-//     },
-//     "Deck2": {
-//         title: "Deck2",
-//         questions: [
-//             {
-//                 question: "Question?",
-//                 answer: "Yes"
-//             },
-//             {
-//                 question: "question? 2",
-//                 answer: "Yes 2"
-//             }
-//         ]
-//     },
-//     "Deck3": {
-//         title: "Deck1",
-//         questions: [
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             }
-//         ]
-//     },
-//     "Deck4": {
-//         title: "Deck2",
-//         questions: [
-//             {
-//                 question: "Question?",
-//                 answer: "Yes"
-//             },
-//             {
-//                 question: "question? 2",
-//                 answer: "Yes 2"
-//             }
-//         ]
-//     },
-//     "Deck5": {
-//         title: "Deck1",
-//         questions: [
-//             {
-//                 question: "This is a question?",
-//                 answer: "Yes it is"
-//             },
-//             {
-//                 question: "This is a question? 2",
-//                 answer: "Yes it is 2"
-//             }
-//         ]
-//     },
-//     "Deck6": {
-//         title: "Deck2",
-//         questions: [
-//             {
-//                 question: "Question?",
-//                 answer: "Yes"
-//             },
-//             {
-//                 question: "question? 2",
-//                 answer: "Yes 2"
-//             }
-//         ]
-//     },
-//     "Deck7": {
-//         title: "Deck2",
-//         questions: [
-//             {
-//                 question: "Question?",
-//                 answer: "Yes"
-//             },
-//             {
-//                 question: "question? 2",
-//                 answer: "Yes 2"
-//             }
-//         ]
-//     },
-//     "Deck8": {
-//         title: "Deck2",
-//         questions: [
-//             {
-//                 question: "Question?",
-//                 answer: "Yes"
-//             },
-//             {
-//                 question: "question? 2",
-//                 answer: "Yes 2"
-//             }
-//         ]
-//     }
-// };
-
 class UdaciCardsApplication extends React.Component<IAllProps, IState> {
     readonly state: IState = {
-        allDecks: {}
     };
 
     static propTypes = {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
     };
 
-    componentDidMount() {
-        // DeckConnector.instance.createNewDeck("exampleDeck")
-        //     // .then(() => {
-        //     //     return DeckConnector.instance.createNewDeck("exampleDeck2")
-        //     // })
-        //     .then(() => {
-        //         const question = new QuestionData();
-        //         question.question = "Question???";
-        //         question.answer = "Answer!!!";
-        //
-        //         return DeckConnector.instance.createNewQuestion("exampleDeck", question);
-        //     })
-        //     .then(() => {
-                return DeckConnector.instance.getAllDecks()
-                    .then((allDecks) => {
-                        this.setState({
-                            allDecks
-                        });
-                    });
-            // });
-    }
-
     render() {
         const {} = this;
         const {} = this.props;
-        const {allDecks} = this.state;
-
-        // const exampleDeck = allDecks["exampleDeck2"];
+        const {} = this.state;
 
         return (
             <View style={styles.container}>
-                {/*<View style={{height: 45}}>*/}
-                    {/*<Text>Open up App.ts to start working on your app!</Text>*/}
-                    {/*<Text>Changes you make will automatically reload.</Text>*/}
-                    {/*<Text>Shake your phone to open the developer menu.</Text>*/}
-                {/*</View>*/}
-                {/*<DeckList decks={allDecks}/>*/}
-                {/*<Deck deck={exampleDeck}/>*/}
-                {/*<Quiz deck={exampleDeck}/>*/}
-                {/*{exampleDeck != null ?*/}
-
-                    {/*<Deck deck={exampleDeck}/>*/}
-                    {/*:*/}
-                    {/*null*/}
-                {/*}*/}
-                {/*<AddNewDeckForm/>*/}
-                {/*<AddNewQuestionForm deck={allDecks["exampleDeck"]}/>*/}
                 <NavigationStack />
-                {/*<Text>{JSON.stringify(allDecks)}</Text>*/}
             </View>
         );
     }
@@ -275,9 +101,8 @@ class UdaciCardsApplication extends React.Component<IAllProps, IState> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#3f3e3d',
         alignItems: "stretch",
-        justifyContent: 'center',
+        justifyContent: "center",
     },
 });
 

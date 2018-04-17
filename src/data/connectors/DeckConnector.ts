@@ -66,7 +66,7 @@ class DeckConnector {
     }
 
     deleteAllDecks() {
-        return AsyncStorage.setItem(DeckConnector.DeckAsyncStorageKey, JSON.stringify({}));
+        AsyncStorage.removeItem(DeckConnector.DeckAsyncStorageKey);
     }
 }
 

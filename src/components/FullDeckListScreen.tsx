@@ -11,8 +11,7 @@ import {
 } from "react-navigation";
 import DeckData from "src/data/models/DeckData";
 import {DeckScreenUtils} from "src/components/DeckScreen";
-import {Text, TouchableNativeFeedback, View} from "react-native";
-import {AddNewDeckScreenUtils} from "src/components/AddNewDeckScreen";
+import {Text, View} from "react-native";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -27,12 +26,12 @@ type IAllProps = IOwnProps & IInjectedProps & NavigationInjectedProps;
 
 // internal state of the component
 interface IState {
-    allDecks: DeckTitleToDeckDataMap;
+    allDecks: DeckTitleToDeckDataMap | null;
 }
 
 class FullDeckListScreen extends React.Component<IAllProps, IState> {
     readonly state: IState = {
-        allDecks: {}
+        allDecks: null
     };
 
     static propTypes = {
@@ -69,9 +68,20 @@ class FullDeckListScreen extends React.Component<IAllProps, IState> {
         const {} = this.props;
         const {allDecks} = this.state;
 
+        if (allDecks == null) {
+            return null;
+        }
+
+        const deckArray = Object.values(allDecks);
+
         return (
             <View>
-                <DeckList decks={allDecks} onDeckPress={onDeckPress} />
+                {
+                    deckArray.length === 0 ?
+                        <Text>Decks that you've created will show up here. You haven't created any decks yet.</Text>
+                        :
+                        <DeckList decks={deckArray} onDeckPress={onDeckPress} />
+                }
             </View>
         );
     }
