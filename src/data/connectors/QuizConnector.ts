@@ -3,7 +3,6 @@ import {AsyncStorage} from "react-native";
 class QuizConnector {
     public static readonly instance = new QuizConnector();
 
-    // private static readonly QuizCompletionDatesAsyncStorageKey = "UdaciCards.QuizCompletionDates"
     private static readonly LastQuizCompletionDateAsyncStorageKey = "UdaciCards.LastQuizCompletionDate";
 
     completeQuiz() {
@@ -49,51 +48,6 @@ class QuizConnector {
                 return this.parseDateString(itemString);
             });
     }
-
-    // completeQuiz() {
-    //     return this.getQuizCompletionTimes()
-    //         .then((completionTimes) => {
-    //             completionTimes.push(new Date());
-    //
-    //             return this.setQuizCompletionTimes(completionTimes);
-    //         });
-    // }
-    //
-    // hasCompletedQuizToday(): Promise<boolean> {
-    //     const today = new Date();
-    //
-    //     return this.getQuizCompletionTimes()
-    //         .then((completionTimes: Date[]) => {
-    //             const quizCompletedToday = completionTimes.some((time) => {
-    //                 // are any of the completed times for today?
-    //                 return time.toDateString() === today.toDateString();
-    //             });
-    //
-    //             return quizCompletedToday;
-    //         });
-    // }
-    //
-    // private setQuizCompletionTimes(completionTimes: Date[]) {
-    //     // only keep dates that are for today to keep the storage from getting too big
-    //     const today = new Date();
-    //
-    //     completionTimes = completionTimes.filter((time) => {
-    //         return today.toDateString() === time.toDateString();
-    //     });
-    //
-    //     return AsyncStorage.setItem(QuizConnector.QuizCompletionDatesAsyncStorageKey, JSON.stringify(completionTimes));
-    // }
-    //
-    // private getQuizCompletionTimes(): Promise<Date[]> {
-    //     return AsyncStorage.getItem(QuizConnector.QuizCompletionDatesAsyncStorageKey)
-    //         .then((storageItem) => {
-    //             if (storageItem == null) {
-    //                 return [];
-    //             }
-    //
-    //             return JSON.parse(storageItem);
-    //         });
-    // }
 }
 
 export default QuizConnector;
