@@ -23,11 +23,15 @@ interface IState {
 }
 
 class Quiz extends React.Component<IAllProps, IState> {
-    readonly state: IState = {
-        currentQuestionIndex: 0,
-        isViewingAnswer: false,
-        correctQuestionCount: 0
-    };
+    readonly state: IState = this.freshState;
+
+    private get freshState(): IState {
+        return {
+            currentQuestionIndex: 0,
+            isViewingAnswer: false,
+            correctQuestionCount: 0
+        };
+    }
 
     static propTypes = {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
@@ -56,16 +60,20 @@ class Quiz extends React.Component<IAllProps, IState> {
         });
     }
 
-    private onToggleViewAnswerOrQuestion = () => {
+    private onViewAnswer = () => {
         this.setState((previousState) => {
             return {
-                isViewingAnswer: !previousState.isViewingAnswer
+                isViewingAnswer: true
             }
         });
     };
 
+    private onRestartQuiz = () => {
+        this.setState(this.freshState);
+    };
+
     render() {
-        const {onMarkCorrect, onMarkIncorrect, onToggleViewAnswerOrQuestion} = this;
+        const {onMarkCorrect, onMarkIncorrect, onViewAnswer, onRestartQuiz} = this;
         const {deck} = this.props;
         const {currentQuestionIndex, isViewingAnswer, correctQuestionCount} = this.state;
 
@@ -85,6 +93,7 @@ class Quiz extends React.Component<IAllProps, IState> {
             return (
                 <View style={{alignItems: "center", paddingVertical: 50}}>
                     <Text>You scored {percentCorrect}%</Text>
+                    <Button onPress={onRestartQuiz} title={"Start over"}/>
                 </View>
             );
         }
@@ -94,8 +103,14 @@ class Quiz extends React.Component<IAllProps, IState> {
         return (
             <View style={{alignItems: "center", paddingVertical: 50}}>
                 <Text>{deck.questions.length - currentQuestionIndex} questions left</Text>
-                <Text>{isViewingAnswer ? currentQuestion.answer : currentQuestion.question}</Text>
-                <Button onPress={onToggleViewAnswerOrQuestion} title={isViewingAnswer ? "View Question" : "View Answer"}/>
+                <Text>Question: {currentQuestion.question}</Text>
+                {
+                    isViewingAnswer ?
+                        <Text>Answer: {currentQuestion.answer}</Text>
+                        :
+                        null
+                }
+                <Button onPress={onViewAnswer} title={"Show Answer"}/>
                 <Button onPress={onMarkCorrect} title={"Correct"}/>
                 <Button onPress={onMarkIncorrect} title={"Incorrect"}/>
             </View>
