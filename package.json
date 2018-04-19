@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@types/react-navigation": "^1.5.5",
+    "@types/expo": "^25.0.4",
     "@types/jest": "^22.0.0",
     "@types/react": "^16.0.38",
     "@types/react-native": "0.55.1",
+    "@types/react-native-vector-icons": "^4.6.0",
+    "@types/react-navigation": "^1.5.5",
     "@types/react-test-renderer": "^16.0.0",
     "jest-expo": "25.0.0",
     "react-native-scripts-ts": "1.11.4",

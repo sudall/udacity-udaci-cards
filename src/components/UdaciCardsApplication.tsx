@@ -1,20 +1,19 @@
 import * as React from "react";
-import {StyleSheet, Text, View} from "react-native";
-import DeckList from "src/components/DeckList";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 import DeckData from "src/data/models/DeckData";
-import {StackNavigator, withNavigation} from "react-navigation";
-import AddNewQuestionForm from "src/components/AddNewQuestionForm";
-import DeckConnector from "src/data/connectors/DeckConnector";
-import QuestionData from "src/data/models/QuestionData";
-import AddNewDeckForm from "src/components/AddNewDeckForm";
+import {
+    NavigationScreenProp,
+    NavigationState,
+    StackNavigator} from "react-navigation";
 import Quiz from "src/components/Quiz";
 import Deck from "src/components/Deck";
-import FullDeckList, {default as FullDeckListScreen, FullDeckListScreenUtils} from "src/components/FullDeckListScreen";
-import DeckPage, {default as DeckScreen, DeckScreenUtils} from "src/components/DeckScreen";
+import {default as FullDeckListScreen, FullDeckListScreenUtils} from "src/components/FullDeckListScreen";
+import {default as DeckScreen, DeckScreenUtils} from "src/components/DeckScreen";
 import AddNewQuestionScreen, {AddNewQuestionScreenUtils} from "src/components/AddNewQuestionScreen";
 import {default as QuizScreen, QuizScreenUtils} from "src/components/QuizScreen";
 import AddNewDeckScreen, {AddNewDeckScreenUtils} from "src/components/AddNewDeckScreen";
-import HomeScreen, {HomeScreenUtils} from "src/components/HomeScreen";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import NotificationConnector from "src/data/connectors/NotificationConnector";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -34,12 +33,20 @@ interface IState {
 
 export type DeckTitleToDeckDataMap = {[deckTitle: string]: DeckData};
 
-const NavigationStack = StackNavigator(
+export const NavigationStack = StackNavigator(
     {
         [FullDeckListScreenUtils.RouteName]: {
             screen: FullDeckListScreen,
-            navigationOptions: {
-                title: "Decks"
+            navigationOptions: ({navigation}: {navigation: NavigationScreenProp<NavigationState>}) => {
+                return {
+                    title: "Decks",
+                    headerRight : (
+                        <TouchableOpacity style={{paddingRight: 20}}
+                            onPress={() => navigation.navigate(AddNewDeckScreenUtils.RouteName)}>
+                            <Ionicons name="md-add" size={30}/>
+                        </TouchableOpacity>
+                    )
+                }
             }
         },
         [DeckScreenUtils.RouteName]: {
@@ -66,15 +73,9 @@ const NavigationStack = StackNavigator(
                 title: "Add a deck"
             }
         },
-        [HomeScreenUtils.RouteName]: {
-            screen: HomeScreen,
-            navigationOptions: {
-                title: "Home"
-            }
-        }
     },
     {
-        initialRouteName: HomeScreenUtils.RouteName
+        initialRouteName: FullDeckListScreenUtils.RouteName
     });
 
 class UdaciCardsApplication extends React.Component<IAllProps, IState> {
@@ -84,6 +85,10 @@ class UdaciCardsApplication extends React.Component<IAllProps, IState> {
     static propTypes = {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
     };
+
+    componentDidMount() {
+        NotificationConnector.instance.updateQuizReminderNotification();
+    }
 
     render() {
         const {} = this;

@@ -2,6 +2,7 @@ import * as React from "react";
 import {View} from "react-native";
 import AddNewDeckForm from "src/components/AddNewDeckForm";
 import {NavigationInjectedProps, withNavigation} from "react-navigation";
+import {DeckScreenUtils} from "src/components/DeckScreen";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -31,8 +32,12 @@ class AddNewDeckScreen extends React.Component<IAllProps, IState> {
         // children: CustomComponentValidators.createChildrenTypesValidator([])
     };
 
-    private onNewDeckAdded = () => {
-        this.props.navigation.goBack();
+    private onNewDeckAdded = (newDeckTitle: string) => {
+        const routeParams: DeckScreenUtils.NavigationProps = {
+            deckTitle: newDeckTitle,
+        };
+
+        this.props.navigation.navigate(DeckScreenUtils.RouteName, routeParams);
     };
 
     render() {

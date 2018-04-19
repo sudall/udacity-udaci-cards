@@ -4,7 +4,7 @@ import DeckConnector from "src/data/connectors/DeckConnector";
 
 // props that are provided as parameters
 interface IOwnProps {
-    onNewDeckAdded: () => void;
+    onNewDeckAdded: (newDeckTitle: string) => void;
 }
 
 // props that are provided via injection
@@ -37,7 +37,7 @@ class AddNewDeckForm extends React.Component<IAllProps, IState> {
                         title: ""
                     });
 
-                    this.props.onNewDeckAdded();
+                    this.props.onNewDeckAdded(title);
                 });
         }
     };

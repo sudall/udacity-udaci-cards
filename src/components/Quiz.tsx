@@ -1,6 +1,7 @@
 import * as React from "react";
 import DeckData from "src/data/models/DeckData";
 import {Button, Text, View} from "react-native";
+import QuizConnector from "src/data/connectors/QuizConnector";
 
 // props that are provided as parameters
 interface IOwnProps {
@@ -75,6 +76,10 @@ class Quiz extends React.Component<IAllProps, IState> {
         const currentQuestionNumber = currentQuestionIndex + 1;
         // if the current question is beyond the number of questions...
         if (currentQuestionNumber > deck.questions.length) {
+            // it means the quiz is over
+            QuizConnector.instance.completeQuiz();
+
+            // show them their score
             const percentCorrect = (correctQuestionCount / deck.questions.length) * 100;
 
             return (
